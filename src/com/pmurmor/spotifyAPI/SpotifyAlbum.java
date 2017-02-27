@@ -12,79 +12,48 @@ public class SpotifyAlbum extends SpotifyAlbumSimplified {
 
 	public SpotifyAlbum(String albumType, SpotifyArtistSimplified[] artists, String[] availableMarkets,
 			SpotifyExternalUrl externalURLs, String href, String id, SpotifyImage[] images, String name, String type,
-			String uri) {
+			String uri, SpotifyCopyright[] copyrights, SpotifyExternalId externalIds, String[] genres, String label,
+			int popularity, String releaseDate, String releaseDatePrecision, SpotifyTrackSimplified[] tracks) {
 		super(albumType, artists, availableMarkets, externalURLs, href, id, images, name, type, uri);
-		this.setCopyrights(copyrights);
-		this.setExternalIds(externalIds);
-		this.setGenres(genres);
-		this.setLabel(label);
-		this.setPopularity(popularity);
-		this.setReleaseDate(releaseDate);
-		this.setReleaseDatePrecision(releaseDatePrecision);
-		this.setTracks(tracks);
+		this.copyrights = copyrights;
+		this.externalIds = externalIds;
+		this.genres = genres;
+		this.label = label;
+		this.popularity = popularity;
+		this.releaseDate = releaseDate;
+		this.releaseDatePrecision = releaseDatePrecision;
+		this.tracks = tracks;
 	}
 
 	public SpotifyCopyright[] getCopyrights() {
 		return copyrights;
 	}
-	
-	public void setCopyrights(SpotifyCopyright[] copyrights) {
-		this.copyrights = copyrights;
-	}
-	
+
 	public SpotifyExternalId getExternalIds() {
 		return externalIds;
 	}
-	
-	public void setExternalIds(SpotifyExternalId externalIds) {
-		this.externalIds = externalIds;
-	}
-	
+
 	public String[] getGenres() {
 		return genres;
 	}
-	
-	public void setGenres(String[] genres) {
-		this.genres = genres;
-	}
-	
+
 	public String getLabel() {
 		return label;
 	}
-	
-	public void setLabel(String label) {
-		this.label = label;
-	}
-	
+
 	public int getPopularity() {
 		return popularity;
 	}
-	
-	public void setPopularity(int popularity) {
-		this.popularity = popularity;
-	}
-	
+
 	public String getReleaseDate() {
 		return releaseDate;
 	}
-	
-	public void setReleaseDate(String releaseDate) {
-		this.releaseDate = releaseDate;
-	}
-	
+
 	public String getReleaseDatePrecision() {
 		return releaseDatePrecision;
 	}
-	
-	public void setReleaseDatePrecision(String releaseDatePrecision) {
-		this.releaseDatePrecision = releaseDatePrecision;
-	}
-	
+
 	public SpotifyTrackSimplified[] getTracks() {
 		return tracks;
-	}
-	
-	public void setTracks(SpotifyTrackSimplified[] tracks) {
-		this.tracks = tracks;
 	}
 }

@@ -8,23 +8,15 @@ public class SpotifyExternalUrl {
 	
 	// Constructor method
 	public SpotifyExternalUrl(String[] keys, String[] values) {
-		this.setKey(keys);
-		this.setValue(values);
+		this.keys = keys;
+		this.values = values;
 	}
 
-	public String[] getKey() {
+	public String[] getKeys() {
 		return keys;
 	}
-	
-	public void setKey(String[] keys) {
-		this.keys = keys;
-	}
-	
-	public String[] getValue() {
+
+	public String[] getValues() {
 		return values;
-	}
-	
-	public void setValue(String[] values) {
-		this.values = values;
 	}
 }

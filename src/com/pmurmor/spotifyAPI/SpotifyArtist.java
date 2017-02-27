@@ -6,44 +6,28 @@ public class SpotifyArtist extends SpotifyArtistSimplified {
 	private SpotifyImage images[];
 	private int popularity;
 	
-	public SpotifyArtist(SpotifyExternalUrl externalURLs, String href, String id, String name, String type,
-			String uri) {
+	public SpotifyArtist(SpotifyExternalUrl externalURLs, String href, String id, String name, String type, String uri,
+			SpotifyFollowers followers, String[] genres, SpotifyImage[] images, int popularity) {
 		super(externalURLs, href, id, name, type, uri);
-		this.setFollowers(followers);
-		this.setGenres(genres);
-		this.setImages(images);
-		this.setPopularity(popularity);
+		this.followers = followers;
+		this.genres = genres;
+		this.images = images;
+		this.popularity = popularity;
 	}
 
 	public SpotifyFollowers getFollowers() {
 		return followers;
 	}
-	
-	public void setFollowers(SpotifyFollowers followers) {
-		this.followers = followers;
-	}
-	
+
 	public String[] getGenres() {
 		return genres;
 	}
-	
-	public void setGenres(String[] genres) {
-		this.genres = genres;
-	}
-	
+
 	public SpotifyImage[] getImages() {
 		return images;
 	}
-	
-	public void setImages(SpotifyImage[] images) {
-		this.images = images;
-	}
-	
+
 	public int getPopularity() {
 		return popularity;
-	}
-	
-	public void setPopularity(int popularity) {
-		this.popularity = popularity;
 	}
 }

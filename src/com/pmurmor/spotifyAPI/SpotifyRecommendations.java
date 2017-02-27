@@ -5,23 +5,15 @@ public class SpotifyRecommendations {
 	private SpotifyTrackSimplified tracks[];
 	
 	public SpotifyRecommendations(SpotifyRecommendationsSeed[] seeds, SpotifyTrackSimplified[] tracks) {
-		this.setSeeds(seeds);
-		this.setTracks(tracks);
+		this.seeds = seeds;
+		this.tracks = tracks;
 	}
-	
+
 	public SpotifyRecommendationsSeed[] getSeeds() {
 		return seeds;
 	}
-	
-	public void setSeeds(SpotifyRecommendationsSeed[] seeds) {
-		this.seeds = seeds;
-	}
-	
+
 	public SpotifyTrackSimplified[] getTracks() {
 		return tracks;
-	}
-	
-	public void setTracks(SpotifyTrackSimplified[] tracks) {
-		this.tracks = tracks;
 	}
 }

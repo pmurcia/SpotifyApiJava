@@ -17,95 +17,55 @@ public class SpotifyAlbumSimplified {
 	public SpotifyAlbumSimplified(String albumType, SpotifyArtistSimplified[] artists, String[] availableMarkets,
 			SpotifyExternalUrl externalURLs, String href, String id, SpotifyImage[] images, String name, String type,
 			String uri) {
-		this.setAlbumType(albumType);
-		this.setArtists(artists);
-		this.setAvailableMarkets(availableMarkets);
-		this.setExternalURLs(externalURLs);
-		this.setHref(href);
-		this.setId(id);
-		this.setImages(images);
-		this.setName(name);
-		this.setType(type);
-		this.setUri(uri);
+		this.albumType = albumType;
+		this.artists = artists;
+		this.availableMarkets = availableMarkets;
+		this.externalURLs = externalURLs;
+		this.href = href;
+		this.id = id;
+		this.images = images;
+		this.name = name;
+		this.type = type;
+		this.uri = uri;
 	}
 
 	public String getAlbumType() {
 		return albumType;
 	}
-	
-	public void setAlbumType(String albumType) {
-		this.albumType = albumType;
-	}
-	
+
 	public SpotifyArtistSimplified[] getArtists() {
 		return artists;
 	}
-	
-	public void setArtists(SpotifyArtistSimplified[] artists) {
-		this.artists = artists;
-	}
-	
+
 	public String[] getAvailableMarkets() {
 		return availableMarkets;
 	}
-	
-	public void setAvailableMarkets(String[] availableMarkets) {
-		this.availableMarkets = availableMarkets;
-	}
-	
+
 	public SpotifyExternalUrl getExternalURLs() {
 		return externalURLs;
 	}
-	
-	public void setExternalURLs(SpotifyExternalUrl externalURLs) {
-		this.externalURLs = externalURLs;
-	}
-	
+
 	public String getHref() {
 		return href;
 	}
-	
-	public void setHref(String href) {
-		this.href = href;
-	}
-	
+
 	public String getId() {
 		return id;
 	}
-	
-	public void setId(String id) {
-		this.id = id;
-	}
-	
+
 	public SpotifyImage[] getImages() {
 		return images;
 	}
-	
-	public void setImages(SpotifyImage[] images) {
-		this.images = images;
-	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+
 	public String getType() {
 		return type;
 	}
-	
-	public void setType(String type) {
-		this.type = type;
-	}
-	
+
 	public String getUri() {
 		return uri;
-	}
-	
-	public void setUri(String uri) {
-		this.uri = uri;
 	}
 }
