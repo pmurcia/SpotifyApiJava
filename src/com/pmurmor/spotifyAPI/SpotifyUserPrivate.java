@@ -6,10 +6,10 @@ public class SpotifyUserPrivate extends SpotifyUserPublic {
 	private String email;
 	private String product;
 	
-	public SpotifyUserPrivate(String displayName, SpotifyExternalUrl externalUrls, SpotifyFollowers followers,
-			String href, String id, SpotifyImage[] images, String type, String uri, String birthdate, String country,
-			String email, String product) {
-		super(displayName, externalUrls, followers, href, id, images, type, uri);
+	public SpotifyUserPrivate(String href, String id, String type, String uri, String displayName,
+			SpotifyExternalUrl externalUrls, SpotifyFollowers followers, SpotifyImage[] images, String birthdate,
+			String country, String email, String product) {
+		super(href, id, type, uri, displayName, externalUrls, followers, images);
 		this.birthdate = birthdate;
 		this.country = country;
 		this.email = email;

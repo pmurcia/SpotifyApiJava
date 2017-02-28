@@ -6,9 +6,9 @@ public class SpotifyArtist extends SpotifyArtistSimplified {
 	private SpotifyImage images[];
 	private int popularity;
 	
-	public SpotifyArtist(SpotifyExternalUrl externalURLs, String href, String id, String name, String type, String uri,
+	public SpotifyArtist(String href, String id, String type, String uri, SpotifyExternalUrl externalURLs, String name,
 			SpotifyFollowers followers, String[] genres, SpotifyImage[] images, int popularity) {
-		super(externalURLs, href, id, name, type, uri);
+		super(href, id, type, uri, externalURLs, name);
 		this.followers = followers;
 		this.genres = genres;
 		this.images = images;

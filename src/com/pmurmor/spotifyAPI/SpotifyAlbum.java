@@ -10,11 +10,12 @@ public class SpotifyAlbum extends SpotifyAlbumSimplified {
 	private String releaseDatePrecision;
 	private SpotifyTrackSimplified tracks[];
 
-	public SpotifyAlbum(String albumType, SpotifyArtistSimplified[] artists, String[] availableMarkets,
-			SpotifyExternalUrl externalURLs, String href, String id, SpotifyImage[] images, String name, String type,
-			String uri, SpotifyCopyright[] copyrights, SpotifyExternalId externalIds, String[] genres, String label,
-			int popularity, String releaseDate, String releaseDatePrecision, SpotifyTrackSimplified[] tracks) {
-		super(albumType, artists, availableMarkets, externalURLs, href, id, images, name, type, uri);
+	public SpotifyAlbum(String href, String id, String type, String uri, String albumType,
+			SpotifyArtistSimplified[] artists, String[] availableMarkets, SpotifyExternalUrl externalURLs,
+			SpotifyImage[] images, String name, SpotifyCopyright[] copyrights, SpotifyExternalId externalIds,
+			String[] genres, String label, int popularity, String releaseDate, String releaseDatePrecision,
+			SpotifyTrackSimplified[] tracks) {
+		super(href, id, type, uri, albumType, artists, availableMarkets, externalURLs, images, name);
 		this.copyrights = copyrights;
 		this.externalIds = externalIds;
 		this.genres = genres;

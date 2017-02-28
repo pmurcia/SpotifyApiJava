@@ -1,41 +1,34 @@
 package com.pmurmor.spotifyAPI;
 
-public class SpotifyTrackSimplified {
+public class SpotifyTrackSimplified extends SpotifyObject {
 	private SpotifyArtistSimplified artists[];
 	private String availableMarkets[];
 	private int discNumber;
 	private int durationMs;
 	private boolean explicit;
 	private SpotifyExternalUrl externalUrls;
-	private String href;
-	private String id;
 	private boolean isPlayable;
 	private SpotifyTrackLink linkedFrom;
 	private String name;
 	private String previewUrl;
 	private int trackNumber;
-	private String type;
-	private String uri;
 	
-	public SpotifyTrackSimplified(SpotifyArtistSimplified[] artists, String[] availableMarkets, int discNumber,
-			int durationMs, boolean explicit, SpotifyExternalUrl externalUrls, String href, String id,
-			boolean isPlayable, SpotifyTrackLink linkedFrom, String name, String previewUrl, int trackNumber,
-			String type, String uri) {
+	public SpotifyTrackSimplified(String href, String id, String type, String uri, SpotifyArtistSimplified[] artists,
+			String[] availableMarkets, int discNumber, int durationMs, boolean explicit,
+			SpotifyExternalUrl externalUrls, boolean isPlayable, SpotifyTrackLink linkedFrom, String name,
+			String previewUrl, int trackNumber) {
+		super(href, id, type, uri);
 		this.artists = artists;
 		this.availableMarkets = availableMarkets;
 		this.discNumber = discNumber;
 		this.durationMs = durationMs;
 		this.explicit = explicit;
 		this.externalUrls = externalUrls;
-		this.href = href;
-		this.id = id;
 		this.isPlayable = isPlayable;
 		this.linkedFrom = linkedFrom;
 		this.name = name;
 		this.previewUrl = previewUrl;
 		this.trackNumber = trackNumber;
-		this.type = type;
-		this.uri = uri;
 	}
 
 	public SpotifyArtistSimplified[] getArtists() {
@@ -62,14 +55,6 @@ public class SpotifyTrackSimplified {
 		return externalUrls;
 	}
 
-	public String getHref() {
-		return href;
-	}
-
-	public String getId() {
-		return id;
-	}
-
 	public boolean isPlayable() {
 		return isPlayable;
 	}
@@ -88,13 +73,5 @@ public class SpotifyTrackSimplified {
 
 	public int getTrackNumber() {
 		return trackNumber;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public String getUri() {
-		return uri;
 	}
 }

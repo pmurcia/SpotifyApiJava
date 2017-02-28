@@ -4,13 +4,14 @@ public class SpotifyTrack extends SpotifyTrackSimplified {
 	private SpotifyAlbumSimplified album;
 	private SpotifyExternalId externalIds;
 	private int popularity;
-	
-	public SpotifyTrack(SpotifyArtistSimplified[] artists, String[] availableMarkets, int discNumber, int durationMs,
-			boolean explicit, SpotifyExternalUrl externalUrls, String href, String id, boolean isPlayable,
-			SpotifyTrackLink linkedFrom, String name, String previewUrl, int trackNumber, String type, String uri,
-			SpotifyAlbumSimplified album, SpotifyExternalId externalIds, int popularity) {
-		super(artists, availableMarkets, discNumber, durationMs, explicit, externalUrls, href, id, isPlayable,
-				linkedFrom, name, previewUrl, trackNumber, type, uri);
+
+	public SpotifyTrack(String href, String id, String type, String uri, SpotifyArtistSimplified[] artists,
+			String[] availableMarkets, int discNumber, int durationMs, boolean explicit,
+			SpotifyExternalUrl externalUrls, boolean isPlayable, SpotifyTrackLink linkedFrom, String name,
+			String previewUrl, int trackNumber, SpotifyAlbumSimplified album, SpotifyExternalId externalIds,
+			int popularity) {
+		super(href, id, type, uri, artists, availableMarkets, discNumber, durationMs, explicit, externalUrls,
+				isPlayable, linkedFrom, name, previewUrl, trackNumber);
 		this.album = album;
 		this.externalIds = externalIds;
 		this.popularity = popularity;

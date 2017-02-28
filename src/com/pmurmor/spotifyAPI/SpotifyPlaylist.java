@@ -3,11 +3,12 @@ package com.pmurmor.spotifyAPI;
 public class SpotifyPlaylist extends SpotifyPlaylistSimplified {
 	private String description;
 	private SpotifyFollowers followers;
-	
-	public SpotifyPlaylist(boolean collaborative, SpotifyExternalUrl externalUrls, String href, String id,
-			SpotifyImage[] images, String name, SpotifyUserPublic owner, boolean isPublic, String snapshotId,
-			SpotifyTrack[] tracks, String type, String uri, String description, SpotifyFollowers followers) {
-		super(collaborative, externalUrls, href, id, images, name, owner, isPublic, snapshotId, tracks, type, uri);
+
+	public SpotifyPlaylist(String href, String id, String type, String uri, boolean collaborative,
+			SpotifyExternalUrl externalUrls, SpotifyImage[] images, String name, SpotifyUserPublic owner,
+			boolean isPublic, String snapshotId, SpotifyTrack[] tracks, String description,
+			SpotifyFollowers followers) {
+		super(href, id, type, uri, collaborative, externalUrls, images, name, owner, isPublic, snapshotId, tracks);
 		this.description = description;
 		this.followers = followers;
 	}
