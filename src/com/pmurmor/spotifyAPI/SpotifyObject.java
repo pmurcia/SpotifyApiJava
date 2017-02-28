@@ -1,7 +1,7 @@
 package com.pmurmor.spotifyAPI;
 
 public abstract class SpotifyObject {
-	private String href;
+	private String href;	// Reference to the API endpoint
 	private String id;
 	private String type;
 	private String uri;
