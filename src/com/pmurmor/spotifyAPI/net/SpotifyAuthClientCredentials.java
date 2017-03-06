@@ -9,18 +9,6 @@ public class SpotifyAuthClientCredentials {
 	private String clientCredentials;
 	private HttpURLConnection connection;
 	
-	public static void main(String args[])
-	{
-		try
-		{
-			new SpotifyAuthClientCredentials("","");
-		} 
-		catch (Exception e)
-		{
-			System.out.println("Error");
-		}
-	}
-	
 	public SpotifyAuthClientCredentials(String clientId, String clientSecret) throws MalformedURLException, IOException 
     {
 		this.setCredentials(clientId, clientSecret);
@@ -30,7 +18,7 @@ public class SpotifyAuthClientCredentials {
 	
 	public void setUpUrl() throws MalformedURLException, IOException
 	{
-		URL u = new URL("https://accounts.spotify.com/api/token?grant_type=client_credentials");
+		URL u = new URL(new String(SpotifyLinks.AUTH_API_TOKEN + "?grant_type=client_credentials"));
         connection = (HttpURLConnection) u.openConnection();
         
         connection.setRequestMethod("POST");
