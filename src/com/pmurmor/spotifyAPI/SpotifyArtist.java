@@ -1,5 +1,10 @@
 package com.pmurmor.spotifyAPI;
 
+import com.pmurmor.spotifyAPI.resources.SpotifyArtistSimplified;
+import com.pmurmor.spotifyAPI.resources.SpotifyExternalUrl;
+import com.pmurmor.spotifyAPI.resources.SpotifyFollowers;
+import com.pmurmor.spotifyAPI.resources.SpotifyImage;
+
 public class SpotifyArtist extends SpotifyArtistSimplified {
 	private SpotifyFollowers followers;
 	private String genres[];

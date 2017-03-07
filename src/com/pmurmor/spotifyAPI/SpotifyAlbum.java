@@ -1,5 +1,11 @@
 package com.pmurmor.spotifyAPI;
 
+import com.pmurmor.spotifyAPI.resources.SpotifyArtistSimplified;
+import com.pmurmor.spotifyAPI.resources.SpotifyCopyright;
+import com.pmurmor.spotifyAPI.resources.SpotifyExternalId;
+import com.pmurmor.spotifyAPI.resources.SpotifyExternalUrl;
+import com.pmurmor.spotifyAPI.resources.SpotifyImage;
+
 public class SpotifyAlbum extends SpotifyAlbumSimplified {
 	private SpotifyCopyright copyrights[];
 	private SpotifyExternalId externalIds;
