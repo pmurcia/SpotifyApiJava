@@ -1,9 +1,5 @@
 package com.pmurmor.spotifyAPI;
 
-import com.pmurmor.spotifyAPI.resources.SpotifyArtistSimplified;
-import com.pmurmor.spotifyAPI.resources.SpotifyExternalUrl;
-import com.pmurmor.spotifyAPI.resources.SpotifyTrackLink;
-
 public class SpotifyTrackSimplified extends SpotifyObject {
 	private SpotifyArtistSimplified artists[];
 	private String availableMarkets[];

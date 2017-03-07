@@ -7,24 +7,47 @@ import java.util.*;
 import org.json.*;
 
 public class SpotifyAuthClientCredentials {
+	
+	private static String accessToken;
+	private static int expiresIn;
+	
+	public static String getAccessToken()
+	{
+		return accessToken;
+	}
+	
+	private static void setAccessToken(String type, String token)
+	{
+		SpotifyAuthClientCredentials.accessToken = new String(type + token);
+	}
+	
+	public static int getExpiresIn()
+	{
+		return expiresIn;
+	}
+	
+	private static void setExpiresIn(int expiresIn)
+	{
+		SpotifyAuthClientCredentials.expiresIn = expiresIn;
+	}
 
 	private String clientCredentials;
 	private HttpURLConnection connection;
-	
+
 	public SpotifyAuthClientCredentials(String clientId, String clientSecret) throws MalformedURLException, IOException 
     {
 		this.setCredentials(clientId, clientSecret);
         this.setUpUrl();
-        System.out.println(this.getResponseText());
+        this.parseJSONResponse(this.getResponseText());
     }
-	
-	public void setCredentials(String clientId, String clientSecret)
+
+	private void setCredentials(String clientId, String clientSecret)
 	{
 		String credentials = clientId + ":" + clientSecret;
 		this.clientCredentials = "Basic " + Base64.getEncoder().encodeToString(credentials.getBytes());
 	}
 	
-	public void setUpUrl() throws MalformedURLException, IOException
+	private void setUpUrl() throws MalformedURLException, IOException
 	{
 		URL u = new URL(new String(SpotifyLinks.AUTH_API_TOKEN + "?grant_type=client_credentials"));
         connection = (HttpURLConnection) u.openConnection();
@@ -35,7 +58,7 @@ public class SpotifyAuthClientCredentials {
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 	}
 	
-	public String getResponseText() throws IOException
+	private String getResponseText() throws IOException
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String s = br.readLine();
@@ -48,5 +71,11 @@ public class SpotifyAuthClientCredentials {
         }
         
         return sb.toString();
+	}
+	
+	private void parseJSONResponse(String responseText) {
+		JSONObject response = new JSONObject(responseText);
+		SpotifyAuthClientCredentials.setAccessToken(response.getString("token_type"), response.getString("access_token"));
+		SpotifyAuthClientCredentials.setExpiresIn(response.getInt("expires_in"));
 	}
 }

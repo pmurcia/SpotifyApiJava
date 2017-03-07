@@ -1,8 +1,5 @@
 package com.pmurmor.spotifyAPI;
 
-import com.pmurmor.spotifyAPI.resources.SpotifyExternalUrl;
-import com.pmurmor.spotifyAPI.resources.SpotifyImage;
-
 public class SpotifyPlaylistSimplified extends SpotifyObject {
 	private boolean collaborative;
 	private SpotifyExternalUrl externalUrls;

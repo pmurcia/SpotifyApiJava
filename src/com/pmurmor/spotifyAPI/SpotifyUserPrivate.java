@@ -1,9 +1,5 @@
 package com.pmurmor.spotifyAPI;
 
-import com.pmurmor.spotifyAPI.resources.SpotifyExternalUrl;
-import com.pmurmor.spotifyAPI.resources.SpotifyFollowers;
-import com.pmurmor.spotifyAPI.resources.SpotifyImage;
-
 public class SpotifyUserPrivate extends SpotifyUserPublic {
 	private String birthdate;
 	private String country;

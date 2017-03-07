@@ -1,9 +1,5 @@
 package com.pmurmor.spotifyAPI;
 
-import com.pmurmor.spotifyAPI.resources.SpotifyExternalUrl;
-import com.pmurmor.spotifyAPI.resources.SpotifyFollowers;
-import com.pmurmor.spotifyAPI.resources.SpotifyImage;
-
 public class SpotifyUserPublic extends SpotifyObject {
 	private String displayName;
 	private SpotifyExternalUrl externalUrls;

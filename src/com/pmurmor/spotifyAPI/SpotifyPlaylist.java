@@ -1,9 +1,5 @@
 package com.pmurmor.spotifyAPI;
 
-import com.pmurmor.spotifyAPI.resources.SpotifyExternalUrl;
-import com.pmurmor.spotifyAPI.resources.SpotifyFollowers;
-import com.pmurmor.spotifyAPI.resources.SpotifyImage;
-
 public class SpotifyPlaylist extends SpotifyPlaylistSimplified {
 	private String description;
 	private SpotifyFollowers followers;

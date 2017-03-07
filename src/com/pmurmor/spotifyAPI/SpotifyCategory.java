@@ -1,7 +1,5 @@
 package com.pmurmor.spotifyAPI;
 
-import com.pmurmor.spotifyAPI.resources.SpotifyImage;
-
 public class SpotifyCategory {
 	private String href;			// A link to the Web API endpoint returning full details of the category
 	private SpotifyImage icons[];	// The category icon, in various sizes

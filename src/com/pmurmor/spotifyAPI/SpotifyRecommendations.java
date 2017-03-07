@@ -1,7 +1,5 @@
 package com.pmurmor.spotifyAPI;
 
-import com.pmurmor.spotifyAPI.resources.SpotifyRecommendationsSeed;
-
 public class SpotifyRecommendations {
 	private SpotifyRecommendationsSeed seeds[];
 	private SpotifyTrackSimplified tracks[];

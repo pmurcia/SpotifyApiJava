@@ -1,9 +1,5 @@
 package com.pmurmor.spotifyAPI;
 
-import com.pmurmor.spotifyAPI.resources.SpotifyArtistSimplified;
-import com.pmurmor.spotifyAPI.resources.SpotifyExternalUrl;
-import com.pmurmor.spotifyAPI.resources.SpotifyImage;
-
 public class SpotifyAlbumSimplified extends SpotifyObject {
 	
 	// Instance attributes

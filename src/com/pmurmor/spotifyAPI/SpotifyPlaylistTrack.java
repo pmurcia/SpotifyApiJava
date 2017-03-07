@@ -1,7 +1,4 @@
-package com.pmurmor.spotifyAPI.resources;
-
-import com.pmurmor.spotifyAPI.SpotifyTrack;
-import com.pmurmor.spotifyAPI.SpotifyUserPublic;
+package com.pmurmor.spotifyAPI;
 
 public class SpotifyPlaylistTrack {
 	private String timestamp;

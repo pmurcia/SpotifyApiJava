@@ -1,4 +1,4 @@
-package com.pmurmor.spotifyAPI.resources;
+package com.pmurmor.spotifyAPI;
 
 public class SpotifyTrackLink {
 	private SpotifyExternalUrl externalUrls;

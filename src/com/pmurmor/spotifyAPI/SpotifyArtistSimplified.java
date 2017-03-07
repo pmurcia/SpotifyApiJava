@@ -1,6 +1,4 @@
-package com.pmurmor.spotifyAPI.resources;
-
-import com.pmurmor.spotifyAPI.SpotifyObject;
+package com.pmurmor.spotifyAPI;
 
 public class SpotifyArtistSimplified extends SpotifyObject {
 	
