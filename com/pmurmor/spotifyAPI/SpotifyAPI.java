@@ -17,7 +17,7 @@ public class SpotifyAPI {
 	public static void main(String args[])
 	{
 		try{
-			new SpotifyAPI("","");
+			new SpotifyAPI("60c0e854a63b418f938dac56be914df5","8f03ae72344648cab8f1ed4a2c943d9e");
 		} catch (Exception e)
 		{
 			System.out.println("Error");
@@ -111,7 +111,7 @@ public class SpotifyAPI {
 	
 	// TODO AUDIO ANALYSIS
 	
-	public static SpotifyAudioFeatures getSpotifyAudioFeatures(String id) throws IOException
+	public static SpotifyAudioFeatures getAudioFeatures(String id) throws IOException
 	{
 		URL searchURL = new URL(SpotifyEndpoints.GET_AUDIO_FEATURES + id);
 		JSONObject response = SpotifyAPI.search(searchURL);
@@ -119,7 +119,7 @@ public class SpotifyAPI {
 		return new SpotifyAudioFeatures(response);
 	}
 	
-	public static SpotifyAudioFeatures[] getSpotifyAudioFeatures(String[] ids) throws IOException
+	public static SpotifyAudioFeatures[] getAudioFeatures(String[] ids) throws IOException
 	{
 		String searchIds = SpotifyAPI.parseArrayToString(ids);
 		URL searchURL = new URL(SpotifyEndpoints.GET_AUDIOS_FEATURES + searchIds);
@@ -184,28 +184,45 @@ public class SpotifyAPI {
 		return new SpotifyAlbumSimplified(response);
 	}
 	
-	public static SpotifyAlbumSimplified[] searchArtists()
+	public static SpotifyArtist[] searchArtists()
 	{
 		URL searchURL = new URL(SpotifyEndpoints.SEARCH_ARTIST);
 		JSONObject response = SpotifyAPI.search(searchURL);
 
-		return new SpotifyAlbumSimplified(response);
+		return new SpotifyArtist(response);
 	}
 	
-	public static SpotifyAlbumSimplified[] searchPlaylists()
+	public static SpotifyPlaylistSimplified[] searchPlaylists()
 	{
 		URL searchURL = new URL(SpotifyEndpoints.SEARCH_PLAYLIST);
 		JSONObject response = SpotifyAPI.search(searchURL);
 
-		return new SpotifyAlbumSimplified(response);
+		return new SpotifyPlaylistSimplified(response);
 	}
 	
-	public static SpotifyAlbumSimplified[] searchTracks()
+	public static SpotifyTrack[] searchTracks()
 	{
 		URL searchURL = new URL(SpotifyEndpoints.SEARCH_TRACK);
 		JSONObject response = SpotifyAPI.search(searchURL);
 
-		return new SpotifyAlbumSimplified(response);
+		return new SpotifyTrack(response);
+	}
+	
+	public static SpotifyTrack getTrack(String id) throws IOException
+	{
+		URL searchURL = new URL(SpotifyEndpoints.GET_TRACK + id);
+		JSONObject response = SpotifyAPI.search(searchURL);
+
+		return new SpotifyTrack(response);
+	}
+	
+	public static SpotifyTrack getTracks(String[] ids) throws IOException
+	{
+		String searchIds = SpotifyAPI.parseArrayToString(ids)
+		URL searchURL = new URL(SpotifyEndpoints.GET_AUDIO_FEATURES + id);
+		JSONObject response = SpotifyAPI.search(searchURL);
+
+		return new SpotifyTrack(response);
 	}
 	
 	private static JSONObject search(URL searchURL) throws IOException
