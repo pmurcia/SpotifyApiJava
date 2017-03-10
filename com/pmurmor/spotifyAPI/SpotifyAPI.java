@@ -5,7 +5,7 @@ import java.io.IOException;
 import com.pmurmor.spotifyAPI.net.*;
 
 public class SpotifyAPI {
-	
+	// Class attributes and methods
 	private static SpotifyToken apiToken;
 
 	public static void main(String args[])
@@ -33,4 +33,7 @@ public class SpotifyAPI {
 	{
 		SpotifyAPI.apiToken = apiToken;
 	}
+	
+	// Search methods
+	
 }
