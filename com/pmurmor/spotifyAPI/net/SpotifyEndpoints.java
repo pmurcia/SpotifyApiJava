@@ -34,7 +34,7 @@ public final class SpotifyEndpoints {
 	
 	public static final String RECOMMENDATIONS = "/recommendations";
 	
-	public static final String SEARCH = "/search?type=";
+	private static final String SEARCH = "/search?type=";
 	public static final String SEARCH_ALBUM = SEARCH + "album";
 	public static final String SEARCH_ARTIST = SEARCH + "artist";
 	public static final String SEARCH_PLAYLIST = SEARCH + "playlist";

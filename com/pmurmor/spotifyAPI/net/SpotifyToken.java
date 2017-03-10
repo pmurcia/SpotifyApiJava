@@ -3,28 +3,28 @@ package com.pmurmor.spotifyAPI.net;
 import java.util.*;
 
 public class SpotifyToken {
-	private static String token;
-	private static int expiresIn;
-	private static Date createdAt;
+	private String token;
+	private int expiresIn;
+	private Date createdAt;
 	
 	public SpotifyToken(String token, int expiresIn)
 	{
-		SpotifyToken.token = token;
-		SpotifyToken.expiresIn = expiresIn;
-		createdAt = new Date();
+		this.token = token;
+		this.expiresIn = expiresIn;
+		this.createdAt = new Date();
 	}
 	
-	public static String getToken()
+	public String getToken()
 	{
 		return token;
 	}
 	
-	public static int getExpiresIn()
+	public int getExpiresIn()
 	{
 		return expiresIn;
 	}
 	
-	public static boolean hasExpired()
+	public boolean hasExpired()
 	{
 		return (new Date().getTime() - createdAt.getTime())>expiresIn;
 	}
@@ -32,6 +32,6 @@ public class SpotifyToken {
 	@Override
 	public String toString()
 	{
-		return SpotifyToken.token + "\nExpires in " + SpotifyToken.expiresIn + " seconds";
+		return this.token + "\nExpires in " + this.expiresIn + " seconds";
 	}
 }
