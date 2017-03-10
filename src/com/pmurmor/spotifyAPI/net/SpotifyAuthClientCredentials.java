@@ -8,8 +8,11 @@ import org.json.*;
 
 public class SpotifyAuthClientCredentials {
 	
+	// Class attributes and methods
 	private static String accessToken;
 	private static int expiresIn;
+	
+	private static SpotifyToken clientToken;
 	
 	public static String getAccessToken()
 	{
@@ -18,7 +21,7 @@ public class SpotifyAuthClientCredentials {
 	
 	private static void setAccessToken(String type, String token)
 	{
-		SpotifyAuthClientCredentials.accessToken = new String(type + token);
+		SpotifyAuthClientCredentials.accessToken = new String(type + " " + token);
 	}
 	
 	public static int getExpiresIn()
@@ -30,7 +33,13 @@ public class SpotifyAuthClientCredentials {
 	{
 		SpotifyAuthClientCredentials.expiresIn = expiresIn;
 	}
+	
+	public static SpotifyToken getClientToken()
+	{
+		return clientToken;
+	}
 
+	// Instance attributes and methods
 	private String clientCredentials;
 	private HttpURLConnection connection;
 
@@ -39,6 +48,7 @@ public class SpotifyAuthClientCredentials {
 		this.setCredentials(clientId, clientSecret);
         this.setUpUrl();
         this.parseJSONResponse(this.getResponseText());
+        clientToken = new SpotifyToken(accessToken, expiresIn);
     }
 
 	private void setCredentials(String clientId, String clientSecret)
@@ -64,7 +74,7 @@ public class SpotifyAuthClientCredentials {
         String s = br.readLine();
         StringBuilder sb = new StringBuilder();
         
-        while(s!=null)
+        while(s != null)
         {
             sb.append(s + "\n");
             s = br.readLine();
