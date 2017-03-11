@@ -1,5 +1,7 @@
 package com.pmurmor.spotifyAPI;
 
+import org.json.*;
+
 public class SpotifyPlaylistSimplified extends SpotifyObject {
 	private boolean collaborative;
 	private SpotifyExternalUrl externalUrls;
@@ -10,7 +12,7 @@ public class SpotifyPlaylistSimplified extends SpotifyObject {
 	private String snapshotId;
 	private SpotifyTrack tracks[];
 	
-	public SpotifyPlaylistSimplified(String href, String id, String type, String uri, boolean collaborative,
+	/*public SpotifyPlaylistSimplified(String href, String id, String type, String uri, boolean collaborative,
 			SpotifyExternalUrl externalUrls, SpotifyImage[] images, String name, SpotifyUserPublic owner,
 			boolean isPublic, String snapshotId, SpotifyTrack[] tracks) {
 		super(href, id, type, uri);
@@ -22,6 +24,56 @@ public class SpotifyPlaylistSimplified extends SpotifyObject {
 		this.isPublic = isPublic;
 		this.snapshotId = snapshotId;
 		this.tracks = tracks;
+	}*/
+	
+	public SpotifyPlaylistSimplified(JSONObject object)
+	{
+		super(object);
+		this.setCollaborative(object);
+		this.setExternalUrls(object);
+		this.setImages(object);
+		this.setName(object);
+		this.setOwner(object);
+		this.setPublic(object);
+		this.setSnapshotId(object);
+		this.setTracks(object);
+	}
+
+	private void setCollaborative(JSONObject object) {
+		this.collaborative = object.getBoolean("collaborative");
+	}
+
+	private void setExternalUrls(JSONObject object) {
+		this.externalUrls = new SpotifyExternalUrl(object.getJSONObject("external_urls"));
+	}
+
+	private void setImages(JSONObject object) {
+		this.images = object
+						.getJSONArray("images")
+						.toList()
+						.stream()
+						.toArray(SpotifyImage[]::new);
+	}
+
+	private void setName(JSONObject object) {
+		this.name = object.getString("name");
+	}
+
+	private void setOwner(JSONObject object) {
+		this.owner = new SpotifyUserPublic(object.getJSONObject("owner"));
+	}
+
+	private void setPublic(JSONObject object) {
+		this.isPublic = object.getBoolean("public");
+	}
+
+	private void setSnapshotId(JSONObject object) {
+		this.snapshotId = object.getString("snapshot_id");
+	}
+
+	private void setTracks(JSONObject object) {
+		/*this.tracks = object
+						.getJSONObject("tracks");*/
 	}
 
 	public boolean isCollaborative() {

@@ -1,11 +1,13 @@
 package com.pmurmor.spotifyAPI;
 
+import org.json.*;
+
 public class SpotifyTrack extends SpotifyTrackSimplified {
 	private SpotifyAlbumSimplified album;
 	private SpotifyExternalId externalIds;
 	private int popularity;
 
-	public SpotifyTrack(String href, String id, String type, String uri, SpotifyArtistSimplified[] artists,
+	/*public SpotifyTrack(String href, String id, String type, String uri, SpotifyArtistSimplified[] artists,
 			String[] availableMarkets, int discNumber, int durationMs, boolean explicit,
 			SpotifyExternalUrl externalUrls, boolean isPlayable, SpotifyTrackLink linkedFrom, String name,
 			String previewUrl, int trackNumber, SpotifyAlbumSimplified album, SpotifyExternalId externalIds,
@@ -15,6 +17,26 @@ public class SpotifyTrack extends SpotifyTrackSimplified {
 		this.album = album;
 		this.externalIds = externalIds;
 		this.popularity = popularity;
+	}*/
+	
+	public SpotifyTrack(JSONObject object)
+	{
+		super(object);
+		this.setAlbum(object);
+		this.setExternalIds(object);
+		this.setPopularity(object);
+	}
+
+	private void setAlbum(JSONObject object) {
+		this.album = new SpotifyAlbumSimplified(object.getJSONObject("album"));
+	}
+
+	private void setExternalIds(JSONObject object) {
+		this.externalIds = new SpotifyExternalId(object.getJSONObject("external_ids"));
+	}
+
+	private void setPopularity(JSONObject object) {
+		this.popularity = object.getInt("popularity");
 	}
 
 	public SpotifyAlbumSimplified getAlbum() {

@@ -1,28 +1,30 @@
 package com.pmurmor.spotifyAPI;
 
+import org.json.*;
+
 public class SpotifyAudioFeatures {
 	
 	// Instance attributes
-	private float acousticness;
+	private double acousticness;
 	private String analysisUrl;
-	private float danceability;
+	private double danceability;
 	private int durationMs;
-	private float energy;
+	private double energy;
 	private String id;
-	private float instrumentalness;
+	private double instrumentalness;
 	private int key;
-	private float liveness;
-	private float loudness;
+	private double liveness;
+	private double loudness;
 	private int mode;
-	private float speechiness;
-	private float tempo;
+	private double speechiness;
+	private double tempo;
 	private int timeSignature;
 	private String trackHref;
 	private String type;
 	private String uri;
-	private float valence;
+	private double valence;
 	
-	public SpotifyAudioFeatures(float acousticness, String analysisUrl, float danceability, int durationMs,
+	/*public SpotifyAudioFeatures(float acousticness, String analysisUrl, float danceability, int durationMs,
 			float energy, String id, float instrumentalness, int key, float liveness, float loudness, int mode,
 			float speechiness, float tempo, int timeSignature, String trackHref, String type, String uri,
 			float valence) {
@@ -44,9 +46,103 @@ public class SpotifyAudioFeatures {
 		this.type = type;
 		this.uri = uri;
 		this.valence = valence;
+	}*/
+	
+	public SpotifyAudioFeatures(JSONObject object)
+	{
+		this.setAcousticness(object);
+		this.setAnalysisUrl(object);
+		this.setDanceability(object);
+		this.setDurationMs(object);
+		this.setEnergy(object);
+		this.setId(object);
+		this.setInstrumentalness(object);
+		this.setKey(object);
+		this.setLiveness(object);
+		this.setLoudness(object);
+		this.setMode(object);
+		this.setSpeechiness(object);
+		this.setTempo(object);
+		this.setTimeSignature(object);
+		this.setTrackHref(object);
+		this.setType(object);
+		this.setUri(object);
+		this.setValence(object);
 	}
 
-	public float getAcousticness() {
+	private void setAcousticness(JSONObject object) {
+		this.acousticness = object.getDouble("acousticness");
+	}
+
+	private void setAnalysisUrl(JSONObject object) {
+		this.analysisUrl = object.getString("analysis_url");
+	}
+
+	private void setDanceability(JSONObject object) {
+		this.danceability = object.getDouble("danceability");
+	}
+
+	private void setDurationMs(JSONObject object) {
+		this.durationMs = object.getInt("durationMs");
+	}
+
+	private void setEnergy(JSONObject object) {
+		this.energy = object.getDouble("energy");
+	}
+
+	private void setId(JSONObject object) {
+		this.id = object.getString("id");
+	}
+
+	private void setInstrumentalness(JSONObject object) {
+		this.instrumentalness = object.getDouble("instrumentalness");
+	}
+
+	private void setKey(JSONObject object) {
+		this.key = object.getInt("key");
+	}
+
+	private void setLiveness(JSONObject object) {
+		this.liveness = object.getDouble("liveness");
+	}
+
+	private void setLoudness(JSONObject object) {
+		this.loudness = object.getDouble("loudness");
+	}
+
+	private void setMode(JSONObject object) {
+		this.mode = object.getInt("mode");
+	}
+
+	private void setSpeechiness(JSONObject object) {
+		this.speechiness = object.getDouble("speechiness");
+	}
+
+	private void setTempo(JSONObject object) {
+		this.tempo = object.getDouble("tempo");
+	}
+
+	private void setTimeSignature(JSONObject object) {
+		this.timeSignature = object.getInt("timeSignature");
+	}
+
+	private void setTrackHref(JSONObject object) {
+		this.trackHref = object.getString("trackHref");
+	}
+
+	private void setType(JSONObject object) {
+		this.type = object.getString("type");
+	}
+
+	private void setUri(JSONObject object) {
+		this.uri = object.getString("uri");
+	}
+
+	private void setValence(JSONObject object) {
+		this.valence = object.getDouble("valence");
+	}
+
+	public double getAcousticness() {
 		return acousticness;
 	}
 
@@ -54,7 +150,7 @@ public class SpotifyAudioFeatures {
 		return analysisUrl;
 	}
 
-	public float getDanceability() {
+	public double getDanceability() {
 		return danceability;
 	}
 
@@ -62,7 +158,7 @@ public class SpotifyAudioFeatures {
 		return durationMs;
 	}
 
-	public float getEnergy() {
+	public double getEnergy() {
 		return energy;
 	}
 
@@ -70,7 +166,7 @@ public class SpotifyAudioFeatures {
 		return id;
 	}
 
-	public float getInstrumentalness() {
+	public double getInstrumentalness() {
 		return instrumentalness;
 	}
 
@@ -78,11 +174,11 @@ public class SpotifyAudioFeatures {
 		return key;
 	}
 
-	public float getLiveness() {
+	public double getLiveness() {
 		return liveness;
 	}
 
-	public float getLoudness() {
+	public double getLoudness() {
 		return loudness;
 	}
 
@@ -90,11 +186,11 @@ public class SpotifyAudioFeatures {
 		return mode;
 	}
 
-	public float getSpeechiness() {
+	public double getSpeechiness() {
 		return speechiness;
 	}
 
-	public float getTempo() {
+	public double getTempo() {
 		return tempo;
 	}
 
@@ -114,7 +210,7 @@ public class SpotifyAudioFeatures {
 		return uri;
 	}
 
-	public float getValence() {
+	public double getValence() {
 		return valence;
 	}
 }

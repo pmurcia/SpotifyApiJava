@@ -1,5 +1,7 @@
 package com.pmurmor.spotifyAPI;
 
+import org.json.*;
+
 public class SpotifyTrackSimplified extends SpotifyObject {
 	private SpotifyArtistSimplified artists[];
 	private String availableMarkets[];
@@ -13,7 +15,7 @@ public class SpotifyTrackSimplified extends SpotifyObject {
 	private String previewUrl;
 	private int trackNumber;
 	
-	public SpotifyTrackSimplified(String href, String id, String type, String uri, SpotifyArtistSimplified[] artists,
+	/*public SpotifyTrackSimplified(String href, String id, String type, String uri, SpotifyArtistSimplified[] artists,
 			String[] availableMarkets, int discNumber, int durationMs, boolean explicit,
 			SpotifyExternalUrl externalUrls, boolean isPlayable, SpotifyTrackLink linkedFrom, String name,
 			String previewUrl, int trackNumber) {
@@ -29,6 +31,74 @@ public class SpotifyTrackSimplified extends SpotifyObject {
 		this.name = name;
 		this.previewUrl = previewUrl;
 		this.trackNumber = trackNumber;
+	}*/
+	
+	public SpotifyTrackSimplified(JSONObject object)
+	{
+		super(object);
+		this.setArtists(object);
+		this.setAvailableMarkets(object);
+		this.setDiscNumber(object);
+		this.setDurationMs(object);
+		this.setExplicit(object);
+		this.setExternalUrls(object);
+		this.setLinkedFrom(object);
+		this.setName(object);
+		this.setPlayable(object);
+		this.setPreviewUrl(object);
+		this.setTrackNumber(object);
+	}
+
+	private void setArtists(JSONObject object) {
+		this.artists = object
+						.getJSONArray("artists")
+						.toList()
+						.stream()
+						.toArray(SpotifyArtistSimplified[]::new);
+	}
+
+	private void setAvailableMarkets(JSONObject object) {
+		this.availableMarkets = object
+									.getJSONArray("availableMarkets")
+									.toList()
+									.stream()
+									.toArray(String[]::new);
+	}
+
+	private void setDiscNumber(JSONObject object) {
+		this.discNumber = object.getInt("disc_number");
+	}
+
+	private void setDurationMs(JSONObject object) {
+		this.durationMs = object.getInt("duration_ms");
+	}
+
+	private void setExplicit(JSONObject object) {
+		this.explicit = object.getBoolean("explicit");
+	}
+
+	private void setExternalUrls(JSONObject object) {
+		this.externalUrls = new SpotifyExternalUrl(object.getJSONObject("external_urls"));
+	}
+
+	private void setPlayable(JSONObject object) {
+		this.isPlayable = object.getBoolean("is_playable");
+	}
+
+	private void setLinkedFrom(JSONObject object) {
+		this.linkedFrom = new SpotifyTrackLink(object.getJSONObject("linked_from"));
+	}
+
+	private void setName(JSONObject object) {
+		this.name = object.getString("name");
+	}
+
+	private void setPreviewUrl(JSONObject object) {
+		this.previewUrl = object.getString("preview_url");
+	}
+
+	private void setTrackNumber(JSONObject object) {
+		this.trackNumber = object.getInt("track_number");
 	}
 
 	public SpotifyArtistSimplified[] getArtists() {

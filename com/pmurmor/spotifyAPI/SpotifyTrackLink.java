@@ -1,37 +1,29 @@
 package com.pmurmor.spotifyAPI;
 
-public class SpotifyTrackLink {
+import org.json.*;
+
+public class SpotifyTrackLink extends SpotifyObject {
 	private SpotifyExternalUrl externalUrls;
-	private String href;
-	private String id;
-	private String type;
-	private String uri;
 	
-	public SpotifyTrackLink(SpotifyExternalUrl externalUrls, String href, String id, String type, String uri) {
+	/*public SpotifyTrackLink(SpotifyExternalUrl externalUrls, String href, String id, String type, String uri) {
 		this.externalUrls = externalUrls;
 		this.href = href;
 		this.id = id;
 		this.type = type;
 		this.uri = uri;
+	}*/
+	
+	public SpotifyTrackLink(JSONObject object)
+	{
+		super(object);
+		this.setExternalUrls(object);
+	}
+
+	private void setExternalUrls(JSONObject object) {
+		this.externalUrls = new SpotifyExternalUrl(object.getJSONObject("external_urls"));
 	}
 
 	public SpotifyExternalUrl getExternalUrls() {
 		return externalUrls;
-	}
-
-	public String getHref() {
-		return href;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public String getUri() {
-		return uri;
 	}
 }
