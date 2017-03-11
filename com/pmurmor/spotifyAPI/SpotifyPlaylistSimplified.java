@@ -2,6 +2,8 @@ package com.pmurmor.spotifyAPI;
 
 import org.json.*;
 
+import java.util.*;
+
 public class SpotifyPlaylistSimplified extends SpotifyObject {
 	private boolean collaborative;
 	private SpotifyExternalUrl externalUrls;
@@ -10,7 +12,7 @@ public class SpotifyPlaylistSimplified extends SpotifyObject {
 	private SpotifyUserPublic owner;
 	private boolean isPublic;
 	private String snapshotId;
-	private SpotifyTrack tracks[];
+	private Map<String,Object> tracks;
 	
 	/*public SpotifyPlaylistSimplified(String href, String id, String type, String uri, boolean collaborative,
 			SpotifyExternalUrl externalUrls, SpotifyImage[] images, String name, SpotifyUserPublic owner,
@@ -72,8 +74,7 @@ public class SpotifyPlaylistSimplified extends SpotifyObject {
 	}
 
 	private void setTracks(JSONObject object) {
-		/*this.tracks = object
-						.getJSONObject("tracks");*/
+		this.tracks = object.getJSONObject("tracks").toMap();
 	}
 
 	public boolean isCollaborative() {
@@ -104,7 +105,7 @@ public class SpotifyPlaylistSimplified extends SpotifyObject {
 		return snapshotId;
 	}
 
-	public SpotifyTrack[] getTracks() {
+	public Map<String,Object> getTracks() {
 		return tracks;
 	}
 }

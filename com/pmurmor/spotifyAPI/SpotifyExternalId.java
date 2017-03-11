@@ -2,9 +2,10 @@ package com.pmurmor.spotifyAPI;
 
 import org.json.*;
 
+import java.util.Map;
+
 public class SpotifyExternalId {
-	private String keys[];
-	private String values[];
+	private Map<String,String> ids;
 	
 	/*public SpotifyExternalId(String[] keys, String[] values) {
 		this.keys = keys;
@@ -13,25 +14,18 @@ public class SpotifyExternalId {
 	
 	public SpotifyExternalId(JSONObject object)
 	{
-		this.setKeys(object);
-		this.setValues(object);
+		this.setIds(object);
 	}
-	
-	private void setKeys(JSONObject object)
-	{
-		
+
+	public Map<String, String> getIds() {
+		return ids;
 	}
-	
-	private void setValues(JSONObject object)
-	{
-		
-	}
-	
-	public String[] getKeys() {
-		return keys;
-	}
-	
-	public String[] getValues() {
-		return values;
+
+	private void setIds(JSONObject object) {
+		String keys[] = JSONObject.getNames(object);
+		for(int i = 0; i < object.length(); i++)
+		{
+			this.ids.put(keys[i], object.getString(keys[i]));
+		}
 	}
 }

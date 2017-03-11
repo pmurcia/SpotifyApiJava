@@ -1,12 +1,13 @@
 package com.pmurmor.spotifyAPI;
 
+import java.util.Map;
+
 import org.json.*;
 
 public class SpotifyExternalUrl {
 	
 	// Instance attributes
-	private String keys[];		// The type of URL
-	private String values[];		// An external, public URL to the object
+	private Map<String,String> urls;		// The type of URL
 	
 	// Constructor method
 	/*public SpotifyExternalUrl(String[] keys, String[] values) {
@@ -16,19 +17,18 @@ public class SpotifyExternalUrl {
 	
 	public SpotifyExternalUrl(JSONObject object)
 	{
-		this.setKeys(object);
-		this.setValues(object);
+		this.setUrls(object);
 	}
 	
-	private void setKeys(JSONObject object) {}
-	
-	private void setValues(JSONObject object) {}
-
-	public String[] getKeys() {
-		return keys;
+	public Map<String, String> getIds() {
+		return urls;
 	}
 
-	public String[] getValues() {
-		return values;
+	private void setUrls(JSONObject object) {
+		String keys[] = JSONObject.getNames(object);
+		for(int i = 0; i < object.length(); i++)
+		{
+			this.urls.put(keys[i], object.getString(keys[i]));
+		}
 	}
 }
