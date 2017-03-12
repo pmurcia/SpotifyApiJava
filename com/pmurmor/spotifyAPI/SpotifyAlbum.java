@@ -10,7 +10,7 @@ public class SpotifyAlbum extends SpotifyAlbumSimplified {
 	private int popularity;
 	private String releaseDate;
 	private String releaseDatePrecision;
-	private SpotifyPaging tracks;
+	private SpotifyPaging<SpotifyTrackSimplified> tracks;
 
 	/*public SpotifyAlbum(String href, String id, String type, String uri, String albumType,
 			SpotifyArtistSimplified[] artists, String[] availableMarkets, SpotifyExternalUrl externalURLs,
@@ -78,7 +78,7 @@ public class SpotifyAlbum extends SpotifyAlbumSimplified {
 	}
 
 	public void setTracks(JSONObject object) {
-		 this.tracks = new SpotifyPaging(object.getJSONObject("tracks"));
+		 this.tracks = new SpotifyPaging<SpotifyTrackSimplified>(object.getJSONObject("tracks"));
 	}
 
 	public SpotifyCopyright[] getCopyrights() {
@@ -109,7 +109,7 @@ public class SpotifyAlbum extends SpotifyAlbumSimplified {
 		return releaseDatePrecision;
 	}
 
-	public SpotifyPaging getTracks() {
+	public SpotifyPaging<SpotifyTrackSimplified> getTracks() {
 		return tracks;
 	}
 }
