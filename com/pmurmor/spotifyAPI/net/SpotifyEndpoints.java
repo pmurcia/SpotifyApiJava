@@ -26,7 +26,7 @@ public final class SpotifyEndpoints {
 	public static final String GET_AUDIOS_FEATURES = BASE_URL + "/audio-features?ids=";
 	
 	private static final String BROWSE = BASE_URL + "/browse";
-	public static final String BROWSE_FEATURED_PLAYLISTS = BROWSE + "/features-playlists";
+	public static final String BROWSE_FEATURED_PLAYLISTS = BROWSE + "/featured-playlists";
 	public static final String BROWSE_NEW_RELEASES = BROWSE + "/new-releases";
 	public static final String BROWSE_CATEGORIES = BROWSE + "/categories";
 	public static final String BROWSE_CATEGORY = BROWSE_CATEGORIES + "/";
