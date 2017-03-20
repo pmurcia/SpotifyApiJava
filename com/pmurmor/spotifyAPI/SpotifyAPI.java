@@ -19,12 +19,6 @@ public class SpotifyAPI {
 		try{
 			new SpotifyAPI("60c0e854a63b418f938dac56be914df5","8f03ae72344648cab8f1ed4a2c943d9e");
 			
-			SpotifyAPI.browseCategories();
-			SpotifyAPI.browseCategory("6ftJBzU2LLQcaKefMi7ee7");
-			SpotifyAPI.browseCategoryPlaylists("6ftJBzU2LLQcaKefMi7ee7");
-			SpotifyAPI.browseFeaturedPlaylists();
-			SpotifyAPI.browseNewReleases();
-			
 			SpotifyAPI.getAlbum("0sNOF9WDwhWunNAHPD3Baj");
 			String[] albums = {"0sNOF9WDwhWunNAHPD3Baj","41MnTivkwTO3UUJ8DrqEJJ"};
 			SpotifyAPI.getAlbums(albums);
@@ -47,9 +41,15 @@ public class SpotifyAPI {
 			SpotifyAPI.searchArtists("eurovision");
 			SpotifyAPI.searchPlaylists("eurovision");
 			SpotifyAPI.searchTracks("eurovision");
+			
+			SpotifyAPI.browseCategories();
+			SpotifyAPI.browseCategory("6ftJBzU2LLQcaKefMi7ee7");
+			SpotifyAPI.browseCategoryPlaylists("6ftJBzU2LLQcaKefMi7ee7");
+			SpotifyAPI.browseFeaturedPlaylists();
+			SpotifyAPI.browseNewReleases();
 		} catch (Exception e)
 		{
-			System.out.println("Error");
+			e.printStackTrace();
 		}
 	}
 	
@@ -235,7 +235,6 @@ public class SpotifyAPI {
 	{
 		URL searchURL = new URL(SpotifyEndpoints.BROWSE_CATEGORIES);
 		JSONObject response = SpotifyAPI.search(searchURL);
-		System.out.println(response);
 		SpotifyCategory[] categories = response
 										.getJSONArray("categories")
 										.toList()
@@ -368,7 +367,8 @@ public class SpotifyAPI {
             sb.append(s + "\n");
             s = br.readLine();
         }
-        
+		System.out.println(sb.toString());
+
         return new JSONObject(sb.toString());
 	}
 	

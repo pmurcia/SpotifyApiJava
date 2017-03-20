@@ -2,6 +2,8 @@ package com.pmurmor.spotifyAPI;
 
 import org.json.*;
 
+import java.util.*;
+
 public class SpotifyAlbumSimplified extends SpotifyObject {
 	
 	// Instance attributes
@@ -36,15 +38,20 @@ public class SpotifyAlbumSimplified extends SpotifyObject {
 	}
 
 	private void setAlbumType(JSONObject object) {
-		this.albumType = object.getString("album_type");
+		try {
+			this.albumType = object.getString("album_type");
+		} catch (Exception e)
+		{
+			System.out.println("No Album Type available.");
+		}
 	}
 
 	private void setArtists(JSONObject object) {
-		this.artists = object
-						.getJSONArray("artists")
-						.toList()
-						.stream()
-						.toArray(SpotifyArtistSimplified[]::new);
+		ArrayList<SpotifyArtistSimplified> songArtists = new ArrayList<SpotifyArtistSimplified>();
+		object
+			.getJSONArray("artists")
+			.forEach(artist -> songArtists.add(new SpotifyArtistSimplified((JSONObject) artist)));
+		this.artists = songArtists.toArray(new SpotifyArtistSimplified[songArtists.size()]);
 	}
 
 	private void setAvailableMarkets(JSONObject object) {
@@ -60,11 +67,11 @@ public class SpotifyAlbumSimplified extends SpotifyObject {
 	}
 
 	private void setImages(JSONObject object) {
-		this.images = object
-						.getJSONArray("images")
-						.toList()
-						.stream()
-						.toArray(SpotifyImage[]::new);
+		ArrayList<SpotifyImage> songImages = new ArrayList<SpotifyImage>();
+		object
+			.getJSONArray("images")
+			.forEach(image -> songImages.add(new SpotifyImage((JSONObject) image)));
+		this.images = songImages.toArray(new SpotifyImage[songImages.size()]);
 	}
 
 	private void setName(JSONObject object) {

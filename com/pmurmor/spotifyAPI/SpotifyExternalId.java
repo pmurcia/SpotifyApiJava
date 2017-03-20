@@ -2,10 +2,10 @@ package com.pmurmor.spotifyAPI;
 
 import org.json.*;
 
-import java.util.Map;
+import java.util.HashMap;
 
 public class SpotifyExternalId {
-	private Map<String,String> ids;
+	private HashMap<String,String> ids = new HashMap<String,String>();
 	
 	/*public SpotifyExternalId(String[] keys, String[] values) {
 		this.keys = keys;
@@ -17,7 +17,7 @@ public class SpotifyExternalId {
 		this.setIds(object);
 	}
 
-	public Map<String, String> getIds() {
+	public HashMap<String, String> getIds() {
 		return ids;
 	}
 

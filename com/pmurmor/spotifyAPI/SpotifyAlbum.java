@@ -1,5 +1,7 @@
 package com.pmurmor.spotifyAPI;
 
+import java.util.ArrayList;
+
 import org.json.*;
 
 public class SpotifyAlbum extends SpotifyAlbumSimplified {
@@ -42,11 +44,11 @@ public class SpotifyAlbum extends SpotifyAlbumSimplified {
 	}
 
 	public void setCopyrights(JSONObject object) {
-		this.copyrights = object
-							.getJSONArray("copyrights")
-							.toList()
-							.stream()
-							.toArray(SpotifyCopyright[]::new);
+		ArrayList<SpotifyCopyright> albumCopyrights = new ArrayList<SpotifyCopyright>();
+		object
+			.getJSONArray("copyrights")
+			.forEach(copyright -> albumCopyrights.add(new SpotifyCopyright((JSONObject) copyright)));
+		this.copyrights = albumCopyrights.toArray(new SpotifyCopyright[albumCopyrights.size()]);
 	}
 
 	public void setExternalIds(JSONObject object) {
@@ -54,31 +56,56 @@ public class SpotifyAlbum extends SpotifyAlbumSimplified {
 	}
 
 	public void setGenres(JSONObject object) {
-		this.genres = object
+		try{
+			this.genres = object
 						.getJSONArray("genres")
 						.toList()
 						.stream()
 						.toArray(String[]::new);
+		} 
+		catch(Exception e)
+		{
+			System.out.println("No genres available");
+		}
 	}
 
 	public void setLabel(JSONObject object) {
-		this.label = object.getString("label");
+		try{
+			this.label = object.getString("label");
+		} catch(Exception e)
+		{
+			System.out.println("No labels available");
+		}
 	}
 
 	public void setPopularity(JSONObject object) {
-		this.popularity = object.getInt("popularity");
+		try {
+			this.popularity = object.getInt("popularity");
+		} catch (Exception e)
+		{
+			System.out.println("No popularity available");
+		}
 	}
 
 	public void setReleaseDate(JSONObject object) {
-		this.releaseDate = object.getString("release_date");
+		try {
+			this.releaseDate = object.getString("release_date");
+		} catch (Exception e) {
+			System.out.println("No release date available.");
+		}
 	}
 
 	public void setReleaseDatePrecision(JSONObject object) {
-		this.releaseDatePrecision = object.getString("releaseDatePrecision");
+		try {
+			this.releaseDatePrecision = object.getString("release_date_precision");
+		} catch (Exception e)
+		{
+			System.out.println("No release date precision available");
+		}
 	}
 
 	public void setTracks(JSONObject object) {
-		 this.tracks = new SpotifyPaging<SpotifyTrackSimplified>(object.getJSONObject("tracks"));
+		this.tracks = new SpotifyPaging<SpotifyTrackSimplified>(object.getJSONObject("tracks"));
 	}
 
 	public SpotifyCopyright[] getCopyrights() {
