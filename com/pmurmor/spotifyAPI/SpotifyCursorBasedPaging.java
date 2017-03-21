@@ -15,9 +15,9 @@ public class SpotifyCursorBasedPaging<T extends SpotifyObject> extends SpotifyAb
 		this.total = total;
 	}*/
 	
-	public SpotifyCursorBasedPaging(JSONObject object)
+	public SpotifyCursorBasedPaging(JSONObject object, Class<T> klazz)
 	{
-		super(object);
+		super(object, klazz);
 		this.setCursors(object);
 	}
 

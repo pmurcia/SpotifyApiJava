@@ -1,5 +1,7 @@
 package com.pmurmor.spotifyAPI;
 
+import java.util.ArrayList;
+
 import org.json.*;
 
 public class SpotifyTrackSimplified extends SpotifyObject {
@@ -50,16 +52,16 @@ public class SpotifyTrackSimplified extends SpotifyObject {
 	}
 
 	private void setArtists(JSONObject object) {
-		this.artists = object
-						.getJSONArray("artists")
-						.toList()
-						.stream()
-						.toArray(SpotifyArtistSimplified[]::new);
+		ArrayList<SpotifyArtistSimplified> songArtists = new ArrayList<SpotifyArtistSimplified>();
+		object
+			.getJSONArray("artists")
+			.forEach(artist -> songArtists.add(new SpotifyArtistSimplified((JSONObject) artist)));
+		this.artists = songArtists.toArray(new SpotifyArtistSimplified[songArtists.size()]);
 	}
 
 	private void setAvailableMarkets(JSONObject object) {
 		this.availableMarkets = object
-									.getJSONArray("availableMarkets")
+									.getJSONArray("available_markets")
 									.toList()
 									.stream()
 									.toArray(String[]::new);
@@ -82,11 +84,19 @@ public class SpotifyTrackSimplified extends SpotifyObject {
 	}
 
 	private void setPlayable(JSONObject object) {
-		this.isPlayable = object.getBoolean("is_playable");
+		try
+		{
+			this.isPlayable = object.getBoolean("is_playable");
+		} catch(Exception e)
+		{}
 	}
 
 	private void setLinkedFrom(JSONObject object) {
-		this.linkedFrom = new SpotifyTrackLink(object.getJSONObject("linked_from"));
+		try
+		{
+			this.linkedFrom = new SpotifyTrackLink(object.getJSONObject("linked_from"));
+		} catch(Exception e)
+		{}
 	}
 
 	private void setName(JSONObject object) {
@@ -94,7 +104,11 @@ public class SpotifyTrackSimplified extends SpotifyObject {
 	}
 
 	private void setPreviewUrl(JSONObject object) {
-		this.previewUrl = object.getString("preview_url");
+		try
+		{
+			this.previewUrl = object.getString("preview_url");
+		} catch(Exception e)
+		{}
 	}
 
 	private void setTrackNumber(JSONObject object) {

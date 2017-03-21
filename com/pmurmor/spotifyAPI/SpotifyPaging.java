@@ -17,9 +17,9 @@ public class SpotifyPaging<T extends SpotifyObject> extends SpotifyAbstractPagin
 		this.total = total;
 	}*/
 	
-	public SpotifyPaging(JSONObject object)
+	public SpotifyPaging(JSONObject object, Class<T> klazz)
 	{
-		super(object);
+		super(object, klazz);
 		this.setOffset(object);
 		this.setPrevious(object);	
 	}

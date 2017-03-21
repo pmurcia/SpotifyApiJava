@@ -18,7 +18,7 @@ public class SpotifyAPI {
 	{
 		try{
 			new SpotifyAPI("60c0e854a63b418f938dac56be914df5","8f03ae72344648cab8f1ed4a2c943d9e");
-			
+			System.out.println(SpotifyAPI.getAPIToken());
 			SpotifyAPI.getAlbum("0sNOF9WDwhWunNAHPD3Baj");
 			String[] albums = {"0sNOF9WDwhWunNAHPD3Baj","41MnTivkwTO3UUJ8DrqEJJ"};
 			SpotifyAPI.getAlbums(albums);

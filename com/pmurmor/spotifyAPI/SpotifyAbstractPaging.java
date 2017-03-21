@@ -12,15 +12,22 @@ public abstract class SpotifyAbstractPaging<T extends SpotifyObject> {
 	private String next;
 	private int total;
 	
-	private Class<T> clazz;
+	private Constructor<T> constructor;
 	
-	public SpotifyAbstractPaging(JSONObject object)
+	public SpotifyAbstractPaging(JSONObject object, Class<T> clazz)
 	{
-		this.setHref(object);
-		this.setItems(object);
-		this.setLimit(object);
-		this.setNext(object);
-		this.setTotal(object);
+		try
+		{
+			constructor = clazz.getDeclaredConstructor(JSONObject.class);
+			this.setHref(object);
+			this.setItems(object);
+			this.setLimit(object);
+			this.setNext(object);
+			this.setTotal(object);
+		} catch(Exception e)
+		{
+			System.out.println("Error in SpotifyAbstractPaging class");
+		}
 	}
 	
 	private void setHref(JSONObject object) {
@@ -31,20 +38,17 @@ public abstract class SpotifyAbstractPaging<T extends SpotifyObject> {
 	@SuppressWarnings("unchecked")
 	private void setItems(JSONObject object) {
 		ArrayList<T> pagingItems = new ArrayList<T>();
-		System.out.println(clazz);
-		Constructor<T> constructor = (Constructor<T>) clazz.getDeclaredConstructors()[0];
 		
 		object
 			.getJSONArray("items")
 			.forEach(item -> {
-					try {
-						System.out.println(constructor);
-						System.out.println(constructor.newInstance((JSONObject)item));
-						//pagingItems.add(constructor.newInstance((JSONObject) item));
-					} catch(Exception e)
-					{
-						e.printStackTrace();
-					}
+				try {
+					T auxT = constructor.newInstance(item);
+					pagingItems.add(auxT);
+				} catch(Exception e)
+				{
+					e.printStackTrace();
+				}
 			});
 		
 		this.items = pagingItems.toArray((T[]) new SpotifyObject[pagingItems.size()]);

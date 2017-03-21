@@ -105,7 +105,7 @@ public class SpotifyAlbum extends SpotifyAlbumSimplified {
 	}
 
 	public void setTracks(JSONObject object) {
-		this.tracks = new SpotifyPaging<SpotifyTrackSimplified>(object.getJSONObject("tracks"));
+		this.tracks = new SpotifyPaging<SpotifyTrackSimplified>(object.getJSONObject("tracks"), SpotifyTrackSimplified.class);
 	}
 
 	public SpotifyCopyright[] getCopyrights() {
