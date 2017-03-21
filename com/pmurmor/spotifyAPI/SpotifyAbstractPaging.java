@@ -64,9 +64,7 @@ public abstract class SpotifyAbstractPaging<T extends SpotifyObject> {
 		{
 			this.next = object.getString("next");
 		} catch(JSONException e)
-		{
-			System.out.println("No next available");
-		}
+		{}
 	}
 
 	private void setTotal(JSONObject object) {

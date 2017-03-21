@@ -29,7 +29,11 @@ public class SpotifyPaging<T extends SpotifyObject> extends SpotifyAbstractPagin
 	}
 
 	private void setPrevious(JSONObject object) {
-		this.previous = object.getString("previous");
+		try
+		{
+			this.previous = object.getString("previous");
+	
+		} catch(Exception e){}
 	}
 
 	public int getOffset() {

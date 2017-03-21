@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 
 import org.json.*;
 
@@ -84,13 +85,13 @@ public class SpotifyAPI {
 		URL searchURL = new URL(SpotifyEndpoints.GET_ALBUMS + searchIds.toString());
 		JSONObject response = SpotifyAPI.search(searchURL);
 		
-		return response
-				.getJSONArray("albums")
-				.toList()
-				.stream()
-				.map(obj -> (JSONObject) obj)
-				.map(SpotifyAlbum::new)
-				.toArray(SpotifyAlbum[]::new);
+		ArrayList<SpotifyAlbum> albums = new ArrayList<SpotifyAlbum>();
+		
+		response
+			.getJSONArray("albums")
+			.forEach(album -> albums.add(new SpotifyAlbum((JSONObject) album)));
+		
+		return albums.toArray(new SpotifyAlbum[albums.size()]);
 			
 	}
 	
@@ -351,6 +352,7 @@ public class SpotifyAPI {
 	
 	private static JSONObject search(URL searchURL) throws IOException
 	{
+		// TODO Delete
 		System.out.println(searchURL);
 		HttpURLConnection connection = (HttpURLConnection) searchURL.openConnection();
 		
@@ -367,6 +369,8 @@ public class SpotifyAPI {
             sb.append(s + "\n");
             s = br.readLine();
         }
+        
+        // TODO Delete
 		System.out.println(sb.toString());
 
         return new JSONObject(sb.toString());
@@ -374,7 +378,16 @@ public class SpotifyAPI {
 	
 	private static String parseArrayToString(String[] array)
 	{
-		return array.toString().replaceAll(", ", ",").replace("[", "").replace("]", "");
+		StringBuilder sb = new StringBuilder("");
+		
+		for(int i = 0; i < array.length; i++)
+		{
+			sb.append(array[i]);
+			if(i == array.length - 1) break;
+			else sb.append(",");
+		}
+		
+		return sb.toString();
 	}
 	
 }
