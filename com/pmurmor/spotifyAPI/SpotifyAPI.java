@@ -92,21 +92,14 @@ public class SpotifyAPI {
 			.forEach(album -> albums.add(new SpotifyAlbum((JSONObject) album)));
 		
 		return albums.toArray(new SpotifyAlbum[albums.size()]);
-			
 	}
 	
-	public static SpotifyTrackSimplified[] getAlbumTracks(String id) throws IOException
+	public static SpotifyPaging<SpotifyTrackSimplified> getAlbumTracks(String id) throws IOException
 	{
 		URL searchURL = new URL(SpotifyEndpoints.GET_ALBUM + id + SpotifyEndpoints.GET_ALBUM_TRACKS);
 		JSONObject response = SpotifyAPI.search(searchURL);
 		
-		return response
-				.getJSONArray("tracks")
-				.toList()
-				.stream()
-				.map(obj -> (JSONObject) obj)
-				.map(SpotifyTrackSimplified::new)
-				.toArray(SpotifyTrackSimplified[]::new);
+		return new SpotifyPaging<SpotifyTrackSimplified>(response,SpotifyTrackSimplified.class);
 	}
 	
 	public static SpotifyArtist getArtist(String id) throws IOException
