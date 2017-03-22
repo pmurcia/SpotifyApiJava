@@ -19,7 +19,10 @@ public class SpotifyFollowers {
 	
 	private void setHref(JSONObject object)
 	{
-		this.href = object.getString("href");
+		try
+		{
+			this.href = object.getString("href");
+		} catch(Exception e){}
 	}
 	
 	private void setTotal(JSONObject object)

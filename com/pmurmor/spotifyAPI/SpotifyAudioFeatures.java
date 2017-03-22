@@ -83,7 +83,7 @@ public class SpotifyAudioFeatures {
 	}
 
 	private void setDurationMs(JSONObject object) {
-		this.durationMs = object.getInt("durationMs");
+		this.durationMs = object.getInt("duration_ms");
 	}
 
 	private void setEnergy(JSONObject object) {
@@ -123,11 +123,11 @@ public class SpotifyAudioFeatures {
 	}
 
 	private void setTimeSignature(JSONObject object) {
-		this.timeSignature = object.getInt("timeSignature");
+		this.timeSignature = object.getInt("time_signature");
 	}
 
 	private void setTrackHref(JSONObject object) {
-		this.trackHref = object.getString("trackHref");
+		this.trackHref = object.getString("track_href");
 	}
 
 	private void setType(JSONObject object) {

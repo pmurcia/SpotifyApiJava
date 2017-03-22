@@ -1,5 +1,7 @@
 package com.pmurmor.spotifyAPI;
 
+import java.util.ArrayList;
+
 import org.json.*;
 
 public class SpotifyArtist extends SpotifyArtistSimplified {
@@ -39,11 +41,11 @@ public class SpotifyArtist extends SpotifyArtistSimplified {
 	}
 
 	private void setImages(JSONObject object) {
-		this.images = object
-						.getJSONArray("images")
-						.toList()
-						.stream()
-						.toArray(SpotifyImage[]::new);
+		ArrayList<SpotifyImage> artistImages = new ArrayList<SpotifyImage>();
+		object
+			.getJSONArray("images")
+			.forEach(image -> artistImages.add(new SpotifyImage((JSONObject) image)));
+		this.images = artistImages.toArray(new SpotifyImage[artistImages.size()]);
 	}
 
 	private void setPopularity(JSONObject object) {
