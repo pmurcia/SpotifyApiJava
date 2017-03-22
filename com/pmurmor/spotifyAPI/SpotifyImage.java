@@ -23,12 +23,18 @@ public class SpotifyImage {
 	
 	private void setHeight(JSONObject object)
 	{
-		this.height = object.getInt("height");
+		try
+		{
+			this.height = object.getInt("height");
+		} catch(Exception e){}
 	}
 	
 	private void setWidth(JSONObject object)
 	{
-		this.width = object.getInt("width");
+		try
+		{
+			this.width = object.getInt("width");
+		} catch(Exception e){}
 	}
 	
 	private void setUrl(JSONObject object)

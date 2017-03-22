@@ -32,17 +32,17 @@ public class SpotifyAPI {
 			SpotifyAPI.getArtistTopTracks("53A0W3U0s8diEn9RhXQhVz","ES");
 			SpotifyAPI.getAudioAnalysis("3n3Ppam7vgaVa1iaRUc9Lp");
 			SpotifyAPI.getAudioFeatures("3n3Ppam7vgaVa1iaRUc9Lp");
-			*/String[] tracks = {"4JpKVNYnVcJ8tuMKjAj50A","24JygzOLM0EmRQeGtFcIcG"};
+			String[] tracks = {"4JpKVNYnVcJ8tuMKjAj50A","24JygzOLM0EmRQeGtFcIcG"};
 			SpotifyAPI.getAudioFeatures(tracks);
-			SpotifyAPI.getRecommendations();
+			SpotifyAPI.getRecommendations("seed_genres=rock,pop,techno");
 			SpotifyAPI.getTrack(tracks[0]);
-			SpotifyAPI.getTracks(tracks);
+			SpotifyAPI.getTracks(tracks);*/
 			
-			/*SpotifyAPI.searchAlbums("eurovision");
+			SpotifyAPI.searchAlbums("eurovision");
 			SpotifyAPI.searchArtists("eurovision");
 			SpotifyAPI.searchPlaylists("eurovision");
 			SpotifyAPI.searchTracks("eurovision");
-			
+			/*
 			SpotifyAPI.browseCategories();
 			SpotifyAPI.browseCategory("6ftJBzU2LLQcaKefMi7ee7");
 			SpotifyAPI.browseCategoryPlaylists("6ftJBzU2LLQcaKefMi7ee7");
@@ -257,68 +257,44 @@ public class SpotifyAPI {
 				.toArray(SpotifyPlaylistSimplified[]::new);
 	}
 	
-	public static SpotifyRecommendations getRecommendations() throws IOException
+	public static SpotifyRecommendations getRecommendations(String arguments) throws IOException
 	{
-		URL searchURL = new URL(SpotifyEndpoints.RECOMMENDATIONS);
+		URL searchURL = new URL(SpotifyEndpoints.RECOMMENDATIONS + "?" + arguments);
 		JSONObject response = SpotifyAPI.search(searchURL);
 
 		return new SpotifyRecommendations(response);
 	}
 	
-	public static SpotifyAlbumSimplified[] searchAlbums(String q) throws IOException
+	public static SpotifyPaging<SpotifyAlbumSimplified> searchAlbums(String q) throws IOException
 	{
-		URL searchURL = new URL(SpotifyEndpoints.SEARCH_ALBUM + "&" + q);
+		URL searchURL = new URL(SpotifyEndpoints.SEARCH_ALBUM + "&q=" + q);
 		JSONObject response = SpotifyAPI.search(searchURL);
 
-		return response
-				.getJSONArray("albums")
-				.toList()
-				.stream()
-				.map(obj -> (JSONObject) obj)
-				.map(SpotifyAlbumSimplified::new)
-				.toArray(SpotifyAlbumSimplified[]::new);
+		return new SpotifyPaging<SpotifyAlbumSimplified>(response.getJSONObject("albums"),SpotifyAlbumSimplified.class);
 	}
 	
-	public static SpotifyArtist[] searchArtists(String q) throws IOException
+	public static SpotifyPaging<SpotifyArtistSimplified> searchArtists(String q) throws IOException
 	{
-		URL searchURL = new URL(SpotifyEndpoints.SEARCH_ARTIST + "&" + q);
+		URL searchURL = new URL(SpotifyEndpoints.SEARCH_ARTIST + "&q=" + q);
 		JSONObject response = SpotifyAPI.search(searchURL);
 
-		return response
-				.getJSONArray("artists")
-				.toList()
-				.stream()
-				.map(obj -> (JSONObject) obj)
-				.map(SpotifyArtist::new)
-				.toArray(SpotifyArtist[]::new);
+		return new SpotifyPaging<SpotifyArtistSimplified>(response.getJSONObject("artists"),SpotifyArtistSimplified.class);
 	}
 	
-	public static SpotifyPlaylistSimplified[] searchPlaylists(String q) throws IOException
+	public static SpotifyPaging<SpotifyPlaylistSimplified> searchPlaylists(String q) throws IOException
 	{
-		URL searchURL = new URL(SpotifyEndpoints.SEARCH_PLAYLIST + "&" + q);
+		URL searchURL = new URL(SpotifyEndpoints.SEARCH_PLAYLIST + "&q=" + q);
 		JSONObject response = SpotifyAPI.search(searchURL);
 
-		return response
-				.getJSONArray("playlists")
-				.toList()
-				.stream()
-				.map(obj -> (JSONObject) obj)
-				.map(SpotifyPlaylistSimplified::new)
-				.toArray(SpotifyPlaylistSimplified[]::new);
+		return new SpotifyPaging<SpotifyPlaylistSimplified>(response.getJSONObject("playlists"),SpotifyPlaylistSimplified.class);
 	}
 	
-	public static SpotifyTrack[] searchTracks(String q) throws IOException
+	public static SpotifyPaging<SpotifyTrackSimplified> searchTracks(String q) throws IOException
 	{
-		URL searchURL = new URL(SpotifyEndpoints.SEARCH_TRACK + "&" + q);
+		URL searchURL = new URL(SpotifyEndpoints.SEARCH_TRACK + "&q=" + q);
 		JSONObject response = SpotifyAPI.search(searchURL);
 
-		return response
-				.getJSONArray("tracks")
-				.toList()
-				.stream()
-				.map(obj -> (JSONObject) obj)
-				.map(SpotifyTrack::new)
-				.toArray(SpotifyTrack[]::new);
+		return new SpotifyPaging<SpotifyTrackSimplified>(response.getJSONObject("tracks"),SpotifyTrackSimplified.class);
 	}
 	
 	public static SpotifyTrack getTrack(String id) throws IOException
@@ -329,13 +305,19 @@ public class SpotifyAPI {
 		return new SpotifyTrack(response);
 	}
 	
-	public static SpotifyTrack getTracks(String[] ids) throws IOException
+	public static SpotifyTrack[] getTracks(String[] ids) throws IOException
 	{
 		String searchIds = SpotifyAPI.parseArrayToString(ids);
-		URL searchURL = new URL(SpotifyEndpoints.GET_AUDIO_FEATURES + searchIds);
+		URL searchURL = new URL(SpotifyEndpoints.GET_TRACKS + searchIds);
 		JSONObject response = SpotifyAPI.search(searchURL);
 
-		return new SpotifyTrack(response);
+		ArrayList<SpotifyTrack> tracksSearch = new ArrayList<SpotifyTrack>();
+		
+		response
+			.getJSONArray("tracks")
+			.forEach(track -> tracksSearch.add(new SpotifyTrack((JSONObject) track)));
+		
+		return tracksSearch.toArray(new SpotifyTrack[tracksSearch.size()]);
 	}
 	
 	private static JSONObject search(URL searchURL) throws IOException

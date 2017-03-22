@@ -1,5 +1,7 @@
 package com.pmurmor.spotifyAPI;
 
+import java.util.ArrayList;
+
 import org.json.*;
 
 public class SpotifyRecommendations {
@@ -18,19 +20,23 @@ public class SpotifyRecommendations {
 	}
 
 	private void setSeeds(JSONObject object) {
-		this.seeds = object
-						.getJSONArray("seeds")
-						.toList()
-						.stream()
-						.toArray(SpotifyRecommendationsSeed[]::new);
+		ArrayList<SpotifyRecommendationsSeed> seedsSearch = new ArrayList<SpotifyRecommendationsSeed>();
+		
+		object
+			.getJSONArray("seeds")
+			.forEach(seed -> seedsSearch.add(new SpotifyRecommendationsSeed((JSONObject) seed)));
+		
+		this.seeds = seedsSearch.toArray(new SpotifyRecommendationsSeed[seedsSearch.size()]);
 	}
 
 	private void setTracks(JSONObject object) {
-		this.tracks = object
-						.getJSONArray("tracks")
-						.toList()
-						.stream()
-						.toArray(SpotifyTrackSimplified[]::new);
+		ArrayList<SpotifyTrackSimplified> seedsTracks = new ArrayList<SpotifyTrackSimplified>();
+		
+		object
+			.getJSONArray("tracks")
+			.forEach(track -> seedsTracks.add(new SpotifyTrackSimplified((JSONObject) track)));
+		
+		this.tracks = seedsTracks.toArray(new SpotifyTrackSimplified[seedsTracks.size()]);
 	}
 
 	public SpotifyRecommendationsSeed[] getSeeds() {

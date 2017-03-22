@@ -9,7 +9,7 @@ public class SpotifyPlaylistSimplified extends SpotifyObject {
 	private SpotifyExternalUrl externalUrls;
 	private SpotifyImage images[];
 	private String name;
-	private SpotifyUserPublic owner;
+	private SpotifyOwner owner;
 	private boolean isPublic;
 	private String snapshotId;
 	private Map<String,Object> tracks;
@@ -50,11 +50,13 @@ public class SpotifyPlaylistSimplified extends SpotifyObject {
 	}
 
 	private void setImages(JSONObject object) {
-		this.images = object
-						.getJSONArray("images")
-						.toList()
-						.stream()
-						.toArray(SpotifyImage[]::new);
+		ArrayList<SpotifyImage> playlistImages = new ArrayList<SpotifyImage>();
+		
+		object
+			.getJSONArray("images")
+			.forEach(image -> playlistImages.add(new SpotifyImage((JSONObject) image)));
+		
+		this.images = playlistImages.toArray(new SpotifyImage[playlistImages.size()]);
 	}
 
 	private void setName(JSONObject object) {
@@ -62,11 +64,14 @@ public class SpotifyPlaylistSimplified extends SpotifyObject {
 	}
 
 	private void setOwner(JSONObject object) {
-		this.owner = new SpotifyUserPublic(object.getJSONObject("owner"));
+		this.owner = new SpotifyOwner(object.getJSONObject("owner"));
 	}
 
 	private void setPublic(JSONObject object) {
-		this.isPublic = object.getBoolean("public");
+		try
+		{
+			this.isPublic = object.getBoolean("public");
+		} catch(Exception e){}
 	}
 
 	private void setSnapshotId(JSONObject object) {
@@ -93,7 +98,7 @@ public class SpotifyPlaylistSimplified extends SpotifyObject {
 		return name;
 	}
 
-	public SpotifyUserPublic getOwner() {
+	public SpotifyOwner getOwner() {
 		return owner;
 	}
 

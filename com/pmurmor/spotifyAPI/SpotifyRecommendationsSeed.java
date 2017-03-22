@@ -39,7 +39,10 @@ public class SpotifyRecommendationsSeed {
 	}
 
 	private void setHref(JSONObject object) {
-		this.href = object.getString("href");
+		try
+		{
+			this.href = object.getString("href");
+		} catch(Exception e){}
 	}
 
 	private void setId(JSONObject object) {
