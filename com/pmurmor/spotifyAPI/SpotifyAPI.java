@@ -14,45 +14,6 @@ import com.pmurmor.spotifyAPI.net.*;
 public class SpotifyAPI {
 	// Class attributes and methods
 	private static SpotifyToken apiToken;
-
-	public static void main(String args[])
-	{
-		try{
-			new SpotifyAPI("60c0e854a63b418f938dac56be914df5","8f03ae72344648cab8f1ed4a2c943d9e");
-			System.out.println(SpotifyAPI.getAPIToken());
-			/*SpotifyAPI.getAlbum("0sNOF9WDwhWunNAHPD3Baj");
-			String[] albums = {"0sNOF9WDwhWunNAHPD3Baj","41MnTivkwTO3UUJ8DrqEJJ"};
-			SpotifyAPI.getAlbums(albums);
-			SpotifyAPI.getAlbumTracks("0sNOF9WDwhWunNAHPD3Baj");
-			SpotifyAPI.getArtist("53A0W3U0s8diEn9RhXQhVz");
-			SpotifyAPI.getArtistAlbums("53A0W3U0s8diEn9RhXQhVz");
-			SpotifyAPI.getArtistRelatedArtists("53A0W3U0s8diEn9RhXQhVz");
-			String[] artists = {"53A0W3U0s8diEn9RhXQhVz","0oSGxfWSnnOXhD2fKuz2Gy"};
-			SpotifyAPI.getArtists(artists);
-			SpotifyAPI.getArtistTopTracks("53A0W3U0s8diEn9RhXQhVz","ES");
-			SpotifyAPI.getAudioAnalysis("3n3Ppam7vgaVa1iaRUc9Lp");
-			SpotifyAPI.getAudioFeatures("3n3Ppam7vgaVa1iaRUc9Lp");
-			String[] tracks = {"4JpKVNYnVcJ8tuMKjAj50A","24JygzOLM0EmRQeGtFcIcG"};
-			SpotifyAPI.getAudioFeatures(tracks);
-			SpotifyAPI.getRecommendations("seed_genres=rock,pop,techno");
-			SpotifyAPI.getTrack(tracks[0]);
-			SpotifyAPI.getTracks(tracks);
-			
-			SpotifyAPI.searchAlbums("eurovision");
-			SpotifyAPI.searchArtists("eurovision");
-			SpotifyAPI.searchPlaylists("eurovision");
-			SpotifyAPI.searchTracks("eurovision");
-			*/
-			SpotifyAPI.browseCategories();
-			SpotifyAPI.browseCategory("pop");
-			SpotifyAPI.browseCategoryPlaylists("pop");
-			SpotifyAPI.browseFeaturedPlaylists();
-			SpotifyAPI.browseNewReleases();
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
 	
 	public SpotifyAPI(String clientId, String clientSecret) throws IOException
 	{
