@@ -2,7 +2,7 @@ package com.pmurmor.spotifyAPI;
 
 import org.json.*;
 
-public class SpotifyPaging<T extends SpotifyObject> extends SpotifyAbstractPaging<T> {
+public class SpotifyPaging<T extends SpotifyItem> extends SpotifyAbstractPaging<T> {
 	
 	private int offset;
 	private String previous;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import org.json.*;
 
-public abstract class SpotifyAbstractPaging<T extends SpotifyObject> {
+public abstract class SpotifyAbstractPaging<T extends SpotifyItem> {
 	private String href;
 	private T[] items;
 	private int limit;
@@ -26,7 +26,7 @@ public abstract class SpotifyAbstractPaging<T extends SpotifyObject> {
 			this.setTotal(object);
 		} catch(Exception e)
 		{
-			System.out.println("Error in SpotifyAbstractPaging class");
+			e.printStackTrace();
 		}
 	}
 	
@@ -34,7 +34,6 @@ public abstract class SpotifyAbstractPaging<T extends SpotifyObject> {
 		this.href = object.getString("href");
 	}
 
-	// TODO needs to save in T type
 	@SuppressWarnings("unchecked")
 	private void setItems(JSONObject object) {
 		ArrayList<T> pagingItems = new ArrayList<T>();
@@ -51,8 +50,7 @@ public abstract class SpotifyAbstractPaging<T extends SpotifyObject> {
 				}
 			});
 		
-		this.items = pagingItems.toArray((T[]) new SpotifyObject[pagingItems.size()]);
-		System.out.println(pagingItems);
+		this.items = pagingItems.toArray((T[]) new SpotifyItem[pagingItems.size()]);
 	}
 
 	private void setLimit(JSONObject object) {

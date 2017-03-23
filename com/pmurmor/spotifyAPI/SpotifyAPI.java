@@ -36,18 +36,18 @@ public class SpotifyAPI {
 			SpotifyAPI.getAudioFeatures(tracks);
 			SpotifyAPI.getRecommendations("seed_genres=rock,pop,techno");
 			SpotifyAPI.getTrack(tracks[0]);
-			SpotifyAPI.getTracks(tracks);*/
+			SpotifyAPI.getTracks(tracks);
 			
 			SpotifyAPI.searchAlbums("eurovision");
 			SpotifyAPI.searchArtists("eurovision");
 			SpotifyAPI.searchPlaylists("eurovision");
 			SpotifyAPI.searchTracks("eurovision");
-			/*
+			*/
 			SpotifyAPI.browseCategories();
-			SpotifyAPI.browseCategory("6ftJBzU2LLQcaKefMi7ee7");
-			SpotifyAPI.browseCategoryPlaylists("6ftJBzU2LLQcaKefMi7ee7");
+			SpotifyAPI.browseCategory("pop");
+			SpotifyAPI.browseCategoryPlaylists("pop");
 			SpotifyAPI.browseFeaturedPlaylists();
-			SpotifyAPI.browseNewReleases();*/
+			SpotifyAPI.browseNewReleases();
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -192,47 +192,28 @@ public class SpotifyAPI {
 		return audioFeatures.toArray(new SpotifyAudioFeatures[audioFeatures.size()]);
 	}
 	
-	public static SpotifyPlaylist[] browseFeaturedPlaylists() throws IOException
+	public static SpotifyPaging<SpotifyPlaylistSimplified> browseFeaturedPlaylists() throws IOException
 	{
 		URL searchURL = new URL(SpotifyEndpoints.BROWSE_FEATURED_PLAYLISTS);
 		JSONObject response = SpotifyAPI.search(searchURL);
 
-		return response
-				.getJSONArray("playlists")
-				.toList()
-				.stream()
-				.map(obj -> (JSONObject) obj)
-				.map(SpotifyPlaylist::new)
-				.toArray(SpotifyPlaylist[]::new);
+		return new SpotifyPaging<SpotifyPlaylistSimplified>(response.getJSONObject("playlists"),SpotifyPlaylistSimplified.class);
 	}
 
-	public static SpotifyAlbumSimplified[] browseNewReleases() throws IOException
+	public static SpotifyPaging<SpotifyAlbumSimplified> browseNewReleases() throws IOException
 	{
 		URL searchURL = new URL(SpotifyEndpoints.BROWSE_NEW_RELEASES);
 		JSONObject response = SpotifyAPI.search(searchURL);
 
-		return response
-				.getJSONArray("albums")
-				.toList()
-				.stream()
-				.map(obj -> (JSONObject) obj)
-				.map(SpotifyAlbumSimplified::new)
-				.toArray(SpotifyAlbumSimplified[]::new);
+		return new SpotifyPaging<SpotifyAlbumSimplified>(response.getJSONObject("albums"),SpotifyAlbumSimplified.class);
 	}
 	
-	public static SpotifyCategory[] browseCategories() throws IOException
+	public static SpotifyPaging<SpotifyCategory> browseCategories() throws IOException
 	{
 		URL searchURL = new URL(SpotifyEndpoints.BROWSE_CATEGORIES);
 		JSONObject response = SpotifyAPI.search(searchURL);
-		SpotifyCategory[] categories = response
-										.getJSONArray("categories")
-										.toList()
-										.stream()
-										.map(obj -> (JSONObject) obj)
-										.map(SpotifyCategory::new)
-										.toArray(SpotifyCategory[]::new);
-		System.out.println(categories);
-		return categories;
+		
+		return new SpotifyPaging<SpotifyCategory>(response.getJSONObject("categories"),SpotifyCategory.class);
 	}
 	
 	public static SpotifyCategory browseCategory(String id) throws IOException
@@ -243,18 +224,12 @@ public class SpotifyAPI {
 		return new SpotifyCategory(response);
 	}
 	
-	public static SpotifyPlaylistSimplified[] browseCategoryPlaylists(String id) throws IOException
+	public static SpotifyPaging<SpotifyPlaylistSimplified> browseCategoryPlaylists(String id) throws IOException
 	{
 		URL searchURL = new URL(SpotifyEndpoints.BROWSE_CATEGORY + id + SpotifyEndpoints.CATEGORY_PLAYLISTS);
 		JSONObject response = SpotifyAPI.search(searchURL);
 
-		return response
-				.getJSONArray("playlists")
-				.toList()
-				.stream()
-				.map(obj -> (JSONObject) obj)
-				.map(SpotifyPlaylistSimplified::new)
-				.toArray(SpotifyPlaylistSimplified[]::new);
+		return new SpotifyPaging<SpotifyPlaylistSimplified>(response.getJSONObject("playlists"),SpotifyPlaylistSimplified.class);
 	}
 	
 	public static SpotifyRecommendations getRecommendations(String arguments) throws IOException

@@ -1,11 +1,11 @@
 package com.pmurmor.spotifyAPI;
 
+import java.util.ArrayList;
+
 import org.json.*;
 
-public class SpotifyCategory {
-	private String href;			// A link to the Web API endpoint returning full details of the category
+public class SpotifyCategory extends SpotifyItem {
 	private SpotifyImage icons[];	// The category icon, in various sizes
-	private String id;				// The Spotify category ID
 	private String name;			// The name of the category
 	
 	/*public SpotifyCategory(String href, SpotifyImage[] icons, String id, String name) {
@@ -17,42 +17,27 @@ public class SpotifyCategory {
 	
 	public SpotifyCategory(JSONObject object)
 	{
-		this.setHref(object);
+		super(object);
 		this.setIcons(object);
-		this.setId(object);
 		this.setName(object);
 	}
 
-	private void setHref(JSONObject object) {
-		this.href = object.getString("href");
-	}
-
 	private void setIcons(JSONObject object) {
-		this.icons = object
-						.getJSONArray("icons")
-						.toList()
-						.stream()
-						.toArray(SpotifyImage[]::new);
-	}
-
-	private void setId(JSONObject object) {
-		this.id = object.getString("id");
+		ArrayList<SpotifyImage> categoryIcons = new ArrayList<SpotifyImage>();
+		
+		object
+			.getJSONArray("icons")
+			.forEach(icon -> categoryIcons.add(new SpotifyImage((JSONObject) icon)));
+		
+		this.icons = categoryIcons.toArray(new SpotifyImage[categoryIcons.size()]);
 	}
 
 	private void setName(JSONObject object) {
 		this.name = object.getString("name");
 	}
 
-	public String getHref() {
-		return href;
-	}
-
 	public SpotifyImage[] getIcons() {
 		return icons;
-	}
-
-	public String getId() {
-		return id;
 	}
 
 	public String getName() {
