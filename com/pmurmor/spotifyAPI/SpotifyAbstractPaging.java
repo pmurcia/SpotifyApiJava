@@ -42,14 +42,13 @@ public abstract class SpotifyAbstractPaging<T extends SpotifyItem> {
 			.getJSONArray("items")
 			.forEach(item -> {
 				try {
-					T auxT = constructor.newInstance(item);
-					pagingItems.add(auxT);
+					pagingItems.add(constructor.newInstance(item));
 				} catch(Exception e)
 				{
 					e.printStackTrace();
 				}
 			});
-		
+
 		this.items = pagingItems.toArray((T[]) new SpotifyItem[pagingItems.size()]);
 	}
 

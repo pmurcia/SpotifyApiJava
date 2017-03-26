@@ -15,7 +15,7 @@ public class SpotifyCursorBasedPaging<T extends SpotifyItem> extends SpotifyAbst
 		this.total = total;
 	}*/
 	
-	public SpotifyCursorBasedPaging(JSONObject object, Class<T> klazz)
+	public SpotifyCursorBasedPaging(JSONObject object, Class<T> klazz) throws NoSuchMethodException, SecurityException
 	{
 		super(object, klazz);
 		this.setCursors(object);

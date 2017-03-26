@@ -15,6 +15,33 @@ public class SpotifyAPI {
 	// Class attributes and methods
 	private static SpotifyToken apiToken;
 	
+	public static void main(String[] args)
+	{
+		try {
+			new SpotifyAPI("60c0e854a63b418f938dac56be914df5","8285e36c24f248969e7e5841e631b040");
+			SpotifyPaging<SpotifyTrack> tracks = SpotifyAPI.searchTracks("shooting%20stars");
+			System.out.println(tracks.getLimit());
+			System.out.println(tracks.getHref());
+			System.out.println(tracks.getNext());
+			System.out.println(tracks.getOffset());
+			System.out.println(tracks.getPrevious());
+			System.out.println(tracks.getTotal());
+			System.out.println(tracks.getItems());
+			SpotifyItem[] items = tracks.getItems();
+			
+			ArrayList<SpotifyTrack> tracksFinal = new ArrayList<SpotifyTrack>();
+			for(int i = 0; i < items.length; i++)
+				tracksFinal.add((SpotifyTrack) items[i]);
+			
+			SpotifyTrack[] tracksSearched = tracksFinal.toArray(new SpotifyTrack[tracksFinal.size()]);
+			System.out.println(tracksSearched);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public SpotifyAPI(String clientId, String clientSecret) throws IOException
 	{
 		new SpotifyAuthClientCredentials(clientId, clientSecret);
@@ -225,12 +252,12 @@ public class SpotifyAPI {
 		return new SpotifyPaging<SpotifyPlaylistSimplified>(response.getJSONObject("playlists"),SpotifyPlaylistSimplified.class);
 	}
 	
-	public static SpotifyPaging<SpotifyTrackSimplified> searchTracks(String q) throws IOException
+	public static SpotifyPaging<SpotifyTrack> searchTracks(String q) throws IOException
 	{
 		URL searchURL = new URL(SpotifyEndpoints.SEARCH_TRACK + "&q=" + q);
 		JSONObject response = SpotifyAPI.search(searchURL);
 
-		return new SpotifyPaging<SpotifyTrackSimplified>(response.getJSONObject("tracks"),SpotifyTrackSimplified.class);
+		return new SpotifyPaging<SpotifyTrack>(response.getJSONObject("tracks"),SpotifyTrack.class);
 	}
 	
 	public static SpotifyTrack getTrack(String id) throws IOException
